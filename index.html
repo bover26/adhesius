@@ -150,15 +150,45 @@
     const previewText = document.getElementById("preview-text");
 
     let currentColor = "black";
-    const cmToPx = 37.8; // 1cm = 37.8px
+    const cmToPx = 37.8;
 
+    // LLISTAT COMPLET DE FONTS DE WORD (+150 fonts)
     const fonts = [
-      "Magneto", "Arial", "Arial Black", "Bahnschrift", "Calibri", 
-      "Cambria", "Comic Sans MS", "Courier New", "Georgia", "Impact",
-      "Lucida Console", "Palatino Linotype", "Segoe UI", "Tahoma",
-      "Times New Roman", "Trebuchet MS", "Verdana"
+      "Arial", "Times New Roman", "Calibri", "Cambria", "Georgia", "Verdana",
+      "Tahoma", "Courier New", "Trebuchet MS", "Franklin Gothic Medium", "Wingdings",
+      "Wingdings 2", "Wingdings 3", "Webdings", "Symbol", "Bahnschrift", "Candara",
+      "Corbel", "Consolas", "Constantia", "Elephant", "Ebrima", "Garamond", "Impact",
+      "Lucida Console", "Lucida Sans Unicode", "Palatino Linotype", "Segoe UI",
+      "Segoe Print", "Segoe Script", "Perpetua", "Rockwell", "Century Gothic", "SimSun",
+      "PMingLiU", "MingLiU", "MS Mincho", "MS Gothic", "Microsoft JhengHei",
+      "Microsoft YaHei", "Malgun Gothic", "Sitka", "Calibri Light", "Cascadia Code",
+      "Fira Code", "Bookman Old Style", "Century Schoolbook", "Goudy Old Style",
+      "Haettenschweiler", "Magneto", "OCR A Extended", "Stencil", "Bauhaus 93",
+      "Bernard MT Condensed", "Broadway", "Brush Script MT", "Chiller", "Colonna MT",
+      "Cooper Black", "Footlight MT Light", "Aharoni", "Andalus", "Angsana New",
+      "AngsanaUPC", "Aparajita", "Arabic Typesetting", "Arial Black", "Arial Narrow",
+      "Agency FB", "Algerian", "Arial Rounded MT Bold", "Baskerville Old Face",
+      "Bell MT", "Berlin Sans FB", "Berlin Sans FB Demi Bold", "Bodoni MT",
+      "Bodoni MT Black", "Bodoni MT Condensed", "Book Antiqua", "Bookshelf Symbol 7",
+      "Bradley Hand ITC", "Britannic Bold", "Calisto MT", "Castellar", "Century",
+      "Comic Sans MS", "Copperplate Gothic Bold", "Copperplate Gothic Light",
+      "Curlz MT", "Dubai", "Elephant", "Engravers MT", "Eras Bold ITC", "Eras Demi ITC",
+      "Eras Light ITC", "Eras Medium ITC", "Felix Titling", "Forte", "Franklin Gothic Book",
+      "Franklin Gothic Demi", "Franklin Gothic Demi Cond", "Franklin Gothic Heavy",
+      "Franklin Gothic Medium Cond", "Freestyle Script", "French Script MT", "Gigi",
+      "Gloucester MT Extra Condensed", "Goudy Stout", "Harlow Solid Italic", "Harrington",
+      "High Tower Text", "Imprint MT Shadow", "Informal Roman", "Javanese Text",
+      "Juice ITC", "Kristen ITC", "Kunstler Script", "Leelawadee UI", "Lucida Bright",
+      "Lucida Calligraphy", "Lucida Fax", "Lucida Handwriting", "Lucida Sans", "Magneto",
+      "Maiandra GD", "Matura MT Script Capitals", "Mistral", "Modern No. 20",
+      "Monotype Corsiva", "MS Outlook", "MS Reference Sans Serif", "MS Reference Specialty",
+      "MT Extra", "Niagara Engraved", "Niagara Solid", "Old English Text MT", "Onyx",
+      "Parchment", "Playbill", "Poor Richard", "Pristina", "Rage Italic", "Ravie",
+      "Script MT Bold", "Showcard Gothic", "Snap ITC", "Tempus Sans ITC", "Viner Hand ITC",
+      "Vivaldi", "Vladimir Script"
     ];
 
+    // Configuració de fonts
     fonts.forEach(font => {
       const opt = document.createElement("option");
       opt.value = font;
@@ -166,7 +196,7 @@
       fontSelect.appendChild(opt);
     });
 
-    fontSelect.value = "Magneto";
+    fontSelect.value = "Arial";
 
     function updateCost() {
       const width = parseFloat(widthInput.value);
@@ -181,17 +211,14 @@
       const width = parseFloat(widthInput.value);
       const height = parseFloat(heightInput.value);
       
-      // Actualitzar mida del contenidor
       preview.style.width = `${width * cmToPx}px`;
       preview.style.height = `${height * cmToPx}px`;
       
-      // Actualitzar text
       previewText.textContent = text;
       previewText.style.fontFamily = fontSelect.value;
       previewText.style.color = currentColor;
       previewText.style.fontSize = `${height * cmToPx * 0.8}px`;
       
-      // Ajustar escala horitzontal
       const textWidth = previewText.scrollWidth;
       const containerWidth = preview.clientWidth;
       const scale = containerWidth / textWidth;
