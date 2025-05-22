@@ -22,32 +22,41 @@
     h1 {
       text-align: center;
       font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: #FFD700;
     }
 
     label {
       margin-top: 1rem;
       display: block;
+      color: #ccc;
     }
 
-    input, select, button.reset-btn {
+    input, select {
       width: 100%;
-      padding: 0.5rem;
-      margin-top: 0.3rem;
-      border-radius: 5px;
-      border: none;
+      padding: 0.8rem;
+      margin-top: 0.5rem;
+      border-radius: 8px;
+      border: 1px solid #555;
+      background: #444;
+      color: #fff;
     }
 
     .section-title {
       font-weight: bold;
       margin-top: 2rem;
       font-size: 1.2rem;
+      color: #FFA500;
+      border-bottom: 2px solid #FFA500;
+      padding-bottom: 0.5rem;
     }
 
     #preview-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-top: 2rem;
+      margin: 2rem 0;
+      min-height: 200px;
     }
 
     #preview {
@@ -55,190 +64,235 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: visible;
-      color: black;
-      font-weight: bold;
-      text-align: center;
+      overflow: hidden;
       position: relative;
-      min-width: 100px;
-      min-height: 50px;
+      width: 100%;
+      height: 150px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: background 0.3s ease;
     }
 
     #preview-text {
       white-space: nowrap;
       transform-origin: center;
-      display: inline-block;
-      padding: 0 10px;
+      text-align: center;
+      font-weight: bold;
+      padding: 0 15px;
+      max-width: 100%;
     }
 
     .color-select {
       display: flex;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
+      gap: 0.8rem;
+      margin-top: 1rem;
       flex-wrap: wrap;
     }
 
     .color-select button {
       border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
       cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: bold;
+    }
+
+    .color-select button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    }
+
+    .example-images {
+      margin-top: 2rem;
+      text-align: center;
     }
 
     .example-images img {
-      max-width: 100%;
-      margin-top: 1rem;
-      border-radius: 8px;
+      max-width: 90%;
+      border-radius: 12px;
+      border: 2px solid #FFA500;
+      margin-top: 1.5rem;
     }
 
-    .reset-btn {
-      background: #555;
-      color: white;
-      cursor: pointer;
-      margin-top: 1rem;
+    #cost {
+      font-size: 1.6rem;
+      color: #FFD700;
+      margin: 1.5rem 0;
+      text-align: center;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>🖌️ Calculadora Adhesius Transfer Personalitzats</h1>
+    <h1>🖌️ CALCULADORA ADHESIUS TRANSFER</h1>
 
-    <label for="text">Text:</label>
-    <input type="text" id="text" placeholder="Escriu el teu text">
+    <div class="section-title">✍️ EL TEU TEXT</div>
+    <input type="text" id="text" placeholder="Introdueix el text aquí" value="EXEMPLE">
 
-    <label class="section-title">📐 MIDES:</label>
-    <p>El rectangle blanc s’ha d’ajustar a les dimensions del text.</p>
-
-    <label for="width">Amplada (cm):</label>
-    <input type="number" id="width" value="10" min="1" max="50">
-
-    <label for="height">Alçada (cm):</label>
-    <input type="number" id="height" value="3" min="1">
-
-    <label for="font">Font:</label>
-    <select id="font"></select>
-
-    <label>Color del text:</label>
-    <div class="color-select" id="color-select">
-      <button style="background:#000; color:white" data-color="black">Negre mate</button>
-      <button style="background:#fff; color:black" data-color="white">Blanc brillant</button>
-      <button style="background:#FFA500; color:black" data-color="#FFA500">Taronja brillant</button>
-      <button style="background:#999; color:black" data-color="#999999">Platejat mate</button>
-      <button style="background:#C9B037; color:black" data-color="#C9B037">Daurat mate</button>
+    <div class="section-title">📏 DIMENSIONS</div>
+    <div class="dimensions-container">
+      <div>
+        <label for="width">Amplada (cm):</label>
+        <input type="number" id="width" value="15" min="1" max="100">
+      </div>
+      <div>
+        <label for="height">Alçada (cm):</label>
+        <input type="number" id="height" value="5" min="1">
+      </div>
     </div>
 
+    <div class="section-title">🎨 DISSENY</div>
+    <div class="design-options">
+      <div>
+        <label for="font">Tipografia:</label>
+        <select id="font"></select>
+      </div>
+      <div>
+        <label>Color del text:</label>
+        <div class="color-select" id="color-select">
+          <button style="background:#000; color:white" data-color="black">NEGRE</button>
+          <button style="background:#fff; color:black" data-color="white">BLANC</button>
+          <button style="background:#FFA500; color:black" data-color="#FFA500">TARONJA</button>
+          <button style="background:#999; color:black" data-color="#999999">PLATEJAT</button>
+          <button style="background:#C9B037; color:black" data-color="#C9B037">DAURAT</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title">👀 PREVISUALITZACIÓ</div>
     <div id="preview-container">
-      <div id="preview"><span id="preview-text">Previsualització</span></div>
+      <div id="preview"><span id="preview-text">PREVISUALITZACIÓ</span></div>
     </div>
 
-    <div class="section-title">💰 Cost estimat:</div>
-    <div id="cost">Calculant...</div>
+    <div class="section-title">💰 PREU FINAL</div>
+    <div id="cost">5.00 €</div>
 
-    <div class="section-title">📸 Exemple real:</div>
+    <div class="section-title">📸 EXEMPLE REAL</div>
     <div class="example-images">
-      <img src="example1.JPG" alt="Exemple d'adhesiu">
+      <img src="example1.jpg" alt="Exemple real d'adhesiu">
     </div>
   </div>
 
   <script>
-    const textInput = document.getElementById("text");
-    const widthInput = document.getElementById("width");
-    const heightInput = document.getElementById("height");
-    const fontSelect = document.getElementById("font");
-    const colorButtons = document.querySelectorAll("#color-select button");
-    const preview = document.getElementById("preview");
-    const previewText = document.getElementById("preview-text");
+    // Elements del DOM
+    const textInput = document.getElementById('text');
+    const widthInput = document.getElementById('width');
+    const heightInput = document.getElementById('height');
+    const fontSelect = document.getElementById('font');
+    const preview = document.getElementById('preview');
+    const previewText = document.getElementById('preview-text');
+    const colorButtons = document.querySelectorAll('#color-select button');
 
-    let currentColor = "black";
-    const cmToPx = 37.8;
+    // Variables d'estat
+    let currentColor = 'black';
+    const cmToPx = 37.8; // Conversió cm a píxels
 
-    // LLISTAT COMPLET DE FONTS DE WORD (+150 fonts)
+    // Llista completa de tipografies de Word (+150 fonts)
     const fonts = [
-      "Arial", "Times New Roman", "Calibri", "Cambria", "Georgia", "Verdana",
-      "Tahoma", "Courier New", "Trebuchet MS", "Franklin Gothic Medium", "Wingdings",
-      "Wingdings 2", "Wingdings 3", "Webdings", "Symbol", "Bahnschrift", "Candara",
-      "Corbel", "Consolas", "Constantia", "Elephant", "Ebrima", "Garamond", "Impact",
-      "Lucida Console", "Lucida Sans Unicode", "Palatino Linotype", "Segoe UI",
-      "Segoe Print", "Segoe Script", "Perpetua", "Rockwell", "Century Gothic", "SimSun",
+      "Arial", "Times New Roman", "Calibri", "Cambria", "Georgia", 
+      "Verdana", "Tahoma", "Courier New", "Trebuchet MS", "Franklin Gothic Medium",
+      "Wingdings", "Wingdings 2", "Wingdings 3", "Webdings", "Symbol",
+      "Bahnschrift", "Candara", "Corbel", "Consolas", "Constantia",
+      "Elephant", "Ebrima", "Garamond", "Impact", "Lucida Console",
+      "Lucida Sans Unicode", "Palatino Linotype", "Segoe UI", "Segoe Print",
+      "Segoe Script", "Perpetua", "Rockwell", "Century Gothic", "SimSun",
       "PMingLiU", "MingLiU", "MS Mincho", "MS Gothic", "Microsoft JhengHei",
-      "Microsoft YaHei", "Malgun Gothic", "Sitka", "Calibri Light", "Cascadia Code",
-      "Fira Code", "Bookman Old Style", "Century Schoolbook", "Goudy Old Style",
-      "Haettenschweiler", "Magneto", "OCR A Extended", "Stencil", "Bauhaus 93",
-      "Bernard MT Condensed", "Broadway", "Brush Script MT", "Chiller", "Colonna MT",
-      "Cooper Black", "Footlight MT Light", "Aharoni", "Andalus", "Angsana New",
-      "AngsanaUPC", "Aparajita", "Arabic Typesetting", "Arial Black", "Arial Narrow",
-      "Agency FB", "Algerian", "Arial Rounded MT Bold", "Baskerville Old Face",
-      "Bell MT", "Berlin Sans FB", "Berlin Sans FB Demi Bold", "Bodoni MT",
-      "Bodoni MT Black", "Bodoni MT Condensed", "Book Antiqua", "Bookshelf Symbol 7",
-      "Bradley Hand ITC", "Britannic Bold", "Calisto MT", "Castellar", "Century",
-      "Comic Sans MS", "Copperplate Gothic Bold", "Copperplate Gothic Light",
-      "Curlz MT", "Dubai", "Elephant", "Engravers MT", "Eras Bold ITC", "Eras Demi ITC",
-      "Eras Light ITC", "Eras Medium ITC", "Felix Titling", "Forte", "Franklin Gothic Book",
+      "Microsoft YaHei", "Malgun Gothic", "Sitka", "Calibri Light",
+      "Cascadia Code", "Fira Code", "Bookman Old Style", "Century Schoolbook",
+      "Goudy Old Style", "Haettenschweiler", "Magneto", "OCR A Extended",
+      "Stencil", "Bauhaus 93", "Bernard MT Condensed", "Broadway",
+      "Brush Script MT", "Chiller", "Colonna MT", "Cooper Black",
+      "Footlight MT Light", "Aharoni", "Andalus", "Angsana New",
+      "AngsanaUPC", "Aparajita", "Arabic Typesetting", "Arial Black",
+      "Arial Narrow", "Agency FB", "Algerian", "Arial Rounded MT Bold",
+      "Baskerville Old Face", "Bell MT", "Berlin Sans FB",
+      "Berlin Sans FB Demi Bold", "Bodoni MT", "Bodoni MT Black",
+      "Bodoni MT Condensed", "Book Antiqua", "Bookshelf Symbol 7",
+      "Bradley Hand ITC", "Britannic Bold", "Calisto MT", "Castellar",
+      "Century", "Comic Sans MS", "Copperplate Gothic Bold",
+      "Copperplate Gothic Light", "Curlz MT", "Dubai", "Elephant",
+      "Engravers MT", "Eras Bold ITC", "Eras Demi ITC", "Eras Light ITC",
+      "Eras Medium ITC", "Felix Titling", "Forte", "Franklin Gothic Book",
       "Franklin Gothic Demi", "Franklin Gothic Demi Cond", "Franklin Gothic Heavy",
-      "Franklin Gothic Medium Cond", "Freestyle Script", "French Script MT", "Gigi",
-      "Gloucester MT Extra Condensed", "Goudy Stout", "Harlow Solid Italic", "Harrington",
-      "High Tower Text", "Imprint MT Shadow", "Informal Roman", "Javanese Text",
-      "Juice ITC", "Kristen ITC", "Kunstler Script", "Leelawadee UI", "Lucida Bright",
-      "Lucida Calligraphy", "Lucida Fax", "Lucida Handwriting", "Lucida Sans", "Magneto",
-      "Maiandra GD", "Matura MT Script Capitals", "Mistral", "Modern No. 20",
-      "Monotype Corsiva", "MS Outlook", "MS Reference Sans Serif", "MS Reference Specialty",
-      "MT Extra", "Niagara Engraved", "Niagara Solid", "Old English Text MT", "Onyx",
+      "Franklin Gothic Medium Cond", "Freestyle Script", "French Script MT",
+      "Gigi", "Gloucester MT Extra Condensed", "Goudy Stout", "Harlow Solid Italic",
+      "Harrington", "High Tower Text", "Imprint MT Shadow", "Informal Roman",
+      "Javanese Text", "Juice ITC", "Kristen ITC", "Kunstler Script",
+      "Leelawadee UI", "Lucida Bright", "Lucida Calligraphy", "Lucida Fax",
+      "Lucida Handwriting", "Lucida Sans", "Magneto", "Maiandra GD",
+      "Matura MT Script Capitals", "Mistral", "Modern No. 20", "Monotype Corsiva",
+      "MS Outlook", "MS Reference Sans Serif", "MS Reference Specialty", "MT Extra",
+      "Niagara Engraved", "Niagara Solid", "Old English Text MT", "Onyx",
       "Parchment", "Playbill", "Poor Richard", "Pristina", "Rage Italic", "Ravie",
-      "Script MT Bold", "Showcard Gothic", "Snap ITC", "Tempus Sans ITC", "Viner Hand ITC",
-      "Vivaldi", "Vladimir Script"
+      "Script MT Bold", "Showcard Gothic", "Snap ITC", "Tempus Sans ITC",
+      "Viner Hand ITC", "Vivaldi", "Vladimir Script"
     ];
 
-    // Configuració de fonts
+    // Inicialització de fonts
     fonts.forEach(font => {
-      const opt = document.createElement("option");
-      opt.value = font;
-      opt.textContent = font;
-      fontSelect.appendChild(opt);
+      const option = document.createElement('option');
+      option.value = font;
+      option.textContent = font;
+      fontSelect.appendChild(option);
     });
+    fontSelect.value = 'Arial';
 
-    fontSelect.value = "Arial";
-
+    // Funció d'actualització del preu
     function updateCost() {
       const width = parseFloat(widthInput.value);
       const height = parseFloat(heightInput.value);
       const area = width * height;
-      let total = 4 + (area > 10 ? (area - 10) * 0.2 : 0);
-      document.getElementById("cost").textContent = `${total.toFixed(2)} €`;
+      
+      let total = 5; // Preu base de 5€
+      if (area > 20) {
+        total += (area - 20) * 0.2; // +0.2€ per cada cm² addicional sobre 20
+      }
+      document.getElementById('cost').textContent = `${total.toFixed(2)} €`;
     }
 
+    // Funció d'actualització de la previsualització
     function updatePreview() {
-      const text = textInput.value || " ";
+      const text = textInput.value || ' ';
       const width = parseFloat(widthInput.value);
       const height = parseFloat(heightInput.value);
+
+      // Configuració del fons
+      preview.style.background = currentColor === 'white' ? '#888' : 'white';
       
+      // Configuració de mides
       preview.style.width = `${width * cmToPx}px`;
       preview.style.height = `${height * cmToPx}px`;
       
+      // Configuració del text
       previewText.textContent = text;
       previewText.style.fontFamily = fontSelect.value;
       previewText.style.color = currentColor;
-      previewText.style.fontSize = `${height * cmToPx * 0.8}px`;
       
-      const textWidth = previewText.scrollWidth;
-      const containerWidth = preview.clientWidth;
-      const scale = containerWidth / textWidth;
+      // Càlcul d'escala
+      const fontSize = height * cmToPx * 0.8;
+      previewText.style.fontSize = `${fontSize}px`;
+      const scale = (width * cmToPx) / previewText.scrollWidth;
       previewText.style.transform = `scaleX(${scale})`;
     }
 
-    colorButtons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        currentColor = btn.getAttribute("data-color");
-        previewText.style.color = currentColor;
+    // Event Listeners
+    colorButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        currentColor = button.dataset.color;
+        updatePreview();
       });
     });
 
-    [textInput, widthInput, heightInput, fontSelect].forEach(el => {
-      el.addEventListener("input", () => {
+    [textInput, widthInput, heightInput, fontSelect].forEach(element => {
+      element.addEventListener('input', () => {
         updatePreview();
         updateCost();
       });
     });
 
+    // Inicialització
     updatePreview();
     updateCost();
   </script>
