@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <title>🖌️ Calculadora Adhesius Transfer</title>
+  <style>
+    body {
+      background: #222;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #333;
+      padding: 2rem;
+      border-radius: 10px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.8rem;
+    }
+
+    label {
+      margin-top: 1rem;
+      display: block;
+    }
+
+    input, select, button.reset-btn {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.3rem;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .section-title {
+      font-weight: bold;
+      margin-top: 2rem;
+      font-size: 1.2rem;
+    }
+
+    #preview-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 2rem;
+    }
+
+    #preview {
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: visible;
+      color: black;
+      font-weight: bold;
+      text-align: center;
+      position: relative;
+      min-width: 100px;
+      min-height: 50px;
+    }
+
+    #preview-text {
+      white-space: nowrap;
+      transform-origin: center;
+      display: inline-block;
+      padding: 0 10px;
+    }
+
+    .color-select {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .color-select button {
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .example-images img {
+      max-width: 100%;
+      margin-top: 1rem;
+      border-radius: 8px;
+    }
+
+    .reset-btn {
+      background: #555;
+      color: white;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🖌️ Calculadora Adhesius Transfer Personalitzats</h1>
+
+    <label for="text">Text:</label>
+    <input type="text" id="text" placeholder="Escriu el teu text">
+
+    <label class="section-title">📐 MIDES:</label>
+    <p>El rectangle blanc s’ha d’ajustar a les dimensions del text.</p>
+
+    <label for="width">Amplada (cm):</label>
+    <input type="number" id="width" value="10" min="1" max="50">
+
+    <label for="height">Alçada (cm):</label>
+    <input type="number" id="height" value="3" min="1">
+
+    <label for="font">Font:</label>
+    <select id="font"></select>
+
+    <label>Color del text:</label>
+    <div class="color-select" id="color-select">
+      <button style="background:#000; color:white" data-color="black">Negre mate</button>
+      <button style="background:#fff; color:black" data-color="white">Blanc brillant</button>
+      <button style="background:#FFA500; color:black" data-color="#FFA500">Taronja brillant</button>
+      <button style="background:#999; color:black" data-color="#999999">Platejat mate</button>
+      <button style="background:#C9B037; color:black" data-color="#C9B037">Daurat mate</button>
+    </div>
+
+    <div id="preview-container">
+      <div id="preview"><span id="preview-text">Previsualització</span></div>
+    </div>
+
+    <div class="section-title">💰 Cost estimat:</div>
+    <div id="cost">Calculant...</div>
+
+    <div class="section-title">📸 Exemple real:</div>
+    <div class="example-images">
+      <img src="example1.jpg" alt="Exemple d'adhesiu">
+    </div>
+  </div>
+
+  <script>
+    const textInput = document.getElementById("text");
+    const widthInput = document.getElementById("width");
+    const heightInput = document.getElementById("height");
+    const fontSelect = document.getElementById("font");
+    const colorButtons = document.querySelectorAll("#color-select button");
+    const preview = document.getElementById("preview");
+    const previewText = document.getElementById("preview-text");
+
+    let currentColor = "black";
+    const cmToPx = 37.8; // 1cm = 37.8px
+
+    const fonts = [
+      "Magneto", "Arial", "Arial Black", "Bahnschrift", "Calibri", 
+      "Cambria", "Comic Sans MS", "Courier New", "Georgia", "Impact",
+      "Lucida Console", "Palatino Linotype", "Segoe UI", "Tahoma",
+      "Times New Roman", "Trebuchet MS", "Verdana"
+    ];
+
+    fonts.forEach(font => {
+      const opt = document.createElement("option");
+      opt.value = font;
+      opt.textContent = font;
+      fontSelect.appendChild(opt);
+    });
+
+    fontSelect.value = "Magneto";
+
+    function updateCost() {
+      const width = parseFloat(widthInput.value);
+      const height = parseFloat(heightInput.value);
+      const area = width * height;
+      let total = 4 + (area > 10 ? (area - 10) * 0.2 : 0);
+      document.getElementById("cost").textContent = `${total.toFixed(2)} €`;
+    }
+
+    function updatePreview() {
+      const text = textInput.value || " ";
+      const width = parseFloat(widthInput.value);
+      const height = parseFloat(heightInput.value);
+      
+      // Actualitzar mida del contenidor
+      preview.style.width = `${width * cmToPx}px`;
+      preview.style.height = `${height * cmToPx}px`;
+      
+      // Actualitzar text
+      previewText.textContent = text;
+      previewText.style.fontFamily = fontSelect.value;
+      previewText.style.color = currentColor;
+      previewText.style.fontSize = `${height * cmToPx * 0.8}px`;
+      
+      // Ajustar escala horitzontal
+      const textWidth = previewText.scrollWidth;
+      const containerWidth = preview.clientWidth;
+      const scale = containerWidth / textWidth;
+      previewText.style.transform = `scaleX(${scale})`;
+    }
+
+    colorButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        currentColor = btn.getAttribute("data-color");
+        previewText.style.color = currentColor;
+      });
+    });
+
+    [textInput, widthInput, heightInput, fontSelect].forEach(el => {
+      el.addEventListener("input", () => {
+        updatePreview();
+        updateCost();
+      });
+    });
+
+    updatePreview();
+    updateCost();
+  </script>
+</body>
+</html>
