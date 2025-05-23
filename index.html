@@ -1,300 +1,276 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
-  <meta charset="UTF-8">
-  <title>🖌️ Calculadora Adhesius Transfer</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculadora Adhesius Transfer</title>
+
+  <!-- Fonts Google -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&family=Barrio&family=Caesar+Dressing&family=Charm:wght@400;700&family=Condiment&family=Creepster&family=Diplomata&family=Exile&family=Henny+Penny&family=Kenia&family=Khand:wght@300;400;500;600;700&family=Leckerli+One&family=Macondo&family=Mr+Dafoe&family=Nosifer&family=Nova+Script&family=Oleo+Script:wght@400;700&family=Permanent+Marker&family=Plaster&family=Poller+One&family=Racing+Sans+One&family=Revalia&family=Rock+Salt&family=Sarina&family=Sedgwick+Ave+Display&family=Sigmar+One&family=Silkscreen:wght@400;700&family=Sonsie+One&family=Stick&family=Syne+Mono&family=Trade+Winds&family=UnifrakturCook:wght@700&family=Warnes&display=swap" rel="stylesheet">
+
   <style>
     body {
-      background: #222;
-      color: #fff;
+      background-color: #1e1e1e;
+      color: #f0f0f0;
       font-family: Arial, sans-serif;
-      padding: 2rem;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: auto;
-      background: #333;
-      padding: 2rem;
-      border-radius: 10px;
+      padding: 20px;
     }
 
     h1 {
-      text-align: center;
-      font-size: 1.8rem;
-      margin-bottom: 1.5rem;
-      color: #FFD700;
+      color: #fdd835;
+      margin-bottom: 20px;
+    }
+
+    section {
+      background-color: #2b2b2b;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      color: #ffa000;
+      font-size: 18px;
+      margin-bottom: 10px;
     }
 
     label {
-      margin-top: 1rem;
       display: block;
-      color: #ccc;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      font-weight: bold;
     }
 
     input, select {
       width: 100%;
-      padding: 0.8rem;
-      margin-top: 0.5rem;
-      border-radius: 8px;
-      border: 1px solid #555;
-      background: #444;
-      color: #fff;
+      padding: 8px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+      margin-bottom: 5px;
     }
 
-    .section-title {
-      font-weight: bold;
-      margin-top: 2rem;
-      font-size: 1.2rem;
-      color: #FFA500;
-      border-bottom: 2px solid #FFA500;
-      padding-bottom: 0.5rem;
+    .error {
+      color: red;
+      font-size: 12px;
+      margin-bottom: 10px;
     }
+
+    .color {
+      padding: 10px 16px;
+      margin: 5px 5px 0 0;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .black { background-color: #000; color: #fff; }
+    .matte-black { background-color: #1a1a1a; color: #fff; }
+    .white { background-color: #fff; color: #000; }
+    .orange { background-color: orange; color: #000; }
+    .silver { background-color: silver; color: #000; }
+    .gold { background-color: goldenrod; color: #000; }
 
     #preview-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 2rem 0;
-      min-height: 200px;
+      background-color: #121212;
+      border-radius: 8px;
+      padding: 20px;
     }
 
     #preview {
-      background: white;
+      background-color: white;
+      border: 2px dashed #ccc;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       overflow: hidden;
+      margin: 0 auto;
       position: relative;
-      width: 100%;
-      height: 150px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      transition: background 0.3s ease;
+      transition: background-color 0.3s ease;
     }
 
-    #preview-text {
+    #previewText {
       white-space: nowrap;
-      transform-origin: center;
-      text-align: center;
-      font-weight: bold;
-      padding: 0 15px;
-      max-width: 100%;
-    }
-
-    .color-select {
-      display: flex;
-      gap: 0.8rem;
-      margin-top: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .color-select button {
-      border: none;
-      padding: 0.8rem 1.5rem;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-weight: bold;
-    }
-
-    .color-select button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-    }
-
-    .example-images {
-      margin-top: 2rem;
-      text-align: center;
-    }
-
-    .example-images img {
-      max-width: 90%;
-      border-radius: 12px;
-      border: 2px solid #FFA500;
-      margin-top: 1.5rem;
-    }
-
-    #cost {
-      font-size: 1.6rem;
-      color: #FFD700;
-      margin: 1.5rem 0;
-      text-align: center;
-      font-weight: bold;
+      font-size: 100px;
+      transform-origin: center center;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🖌️ CALCULADORA ADHESIUS TRANSFER</h1>
+  <!-- La resta del codi es manté EXACTAMENT igual -->
+  <h1>🖋️ CALCULADORA ADHESIUS TRANSFER</h1>
 
-    <div class="section-title">✍️ EL TEU TEXT</div>
-    <input type="text" id="text" placeholder="Introdueix el text aquí" value="EXEMPLE">
+  <section>
+    <h2>📤 EL TEU TEXT</h2>
+    <input type="text" id="text" value="el teu text aquí" oninput="updatePreview()" />
+  </section>
 
-    <div class="section-title">📏 DIMENSIONS</div>
-    <div class="dimensions-container">
-      <div>
-        <label for="width">Amplada (cm):</label>
-        <input type="number" id="width" value="15" min="1" max="100">
-      </div>
-      <div>
-        <label for="height">Alçada (cm):</label>
-        <input type="number" id="height" value="5" min="1">
-      </div>
+  <section>
+    <h2>📏 DIMENSIONS (cm)</h2>
+    <label for="width">Amplada</label>
+    <input type="number" id="width" value="15" min="1" max="30" oninput="updatePreview()" />
+    <div id="widthError" class="error"></div>
+
+    <label for="height">Alçada</label>
+    <input type="number" id="height" value="2" min="1" max="24" oninput="updatePreview()" />
+    <div id="heightError" class="error"></div>
+  </section>
+
+  <section>
+<h2>🎨 DISSENY</h2>
+<label for="font">Tipografia</label>
+<select id="font" onchange="updatePreview()">
+  <option value="'Alkatra', cursive">Alkatra</option>
+  <option value="'Barrio', cursive">Barrio</option>
+  <option value="'Caesar Dressing', cursive">Caesar Dressing</option>
+  <option value="'Charm', cursive">Charm</option>
+  <option value="'Condiment', cursive">Condiment</option>
+  <option value="'Creepster', cursive">Creepster</option>
+  <option value="'Diplomata', cursive">Diplomata</option>
+  <option value="'Exile', cursive">Exile</option>
+  <option value="'Henny Penny', cursive">Henny Penny</option>
+  <option value="'Kenia', cursive">Kenia</option>
+  <option value="'Khand', cursive">Khand</option>
+  <option value="'Leckerli One', cursive" selected>Leckerli One</option>
+  <option value="'Macondo', cursive">Macondo</option>
+  <option value="'Mr Dafoe', cursive">Mr Dafoe</option>
+  <option value="'Nosifer', cursive">Nosifer</option>
+  <option value="'Nova Script', cursive">Nova Script</option>
+  <option value="'Oleo Script', cursive">Oleo Script</option>
+  <option value="'Permanent Marker', cursive">Permanent Marker</option>
+  <option value="'Plaster', cursive">Plaster</option>
+  <option value="'Poller One', cursive">Poller One</option>
+  <option value="'Racing Sans One', cursive">Racing Sans One</option>
+  <option value="'Revalia', cursive">Revalia</option>
+  <option value="'Rock Salt', cursive">Rock Salt</option>
+  <option value="'Sarina', cursive">Sarina</option>
+  <option value="'Sedgwick Ave Display', cursive">Sedgwick Ave Display</option>
+  <option value="'Sigmar One', cursive">Sigmar One</option>
+  <option value="'Silkscreen', cursive">Silkscreen</option>
+  <option value="'Sonsie One', cursive">Sonsie One</option>
+  <option value="'Stick', cursive">Stick</option>
+  <option value="'Syne Mono', cursive">Syne Mono</option>
+  <option value="'Trade Winds', cursive">Trade Winds</option>
+  <option value="'UnifrakturCook', cursive">UnifrakturCook</option>
+  <option value="'Warnes', cursive">Warnes</option>
+  <option value="'Arial', sans-serif">Arial</option>
+
+    </select>
+
+    <label>Color del text</label>
+    <div>
+      <button class="color black" onclick="setColor('#000')">NEGRE</button>
+      <button class="color matte-black" onclick="setColor('#1a1a1a')">NEGRE MATE</button>
+      <button class="color white" onclick="setColor('#fff')">BLANC</button>
+      <button class="color orange" onclick="setColor('orange')">TARONJA</button>
+      <button class="color silver" onclick="setColor('silver')">PLATEJAT</button>
+      <button class="color gold" onclick="setColor('goldenrod')">DAURAT</button>
     </div>
+  </section>
 
-    <div class="section-title">🎨 DISSENY</div>
-    <div class="design-options">
-      <div>
-        <label for="font">Tipografia:</label>
-        <select id="font"></select>
-      </div>
-      <div>
-        <label>Color del text:</label>
-        <div class="color-select" id="color-select">
-          <button style="background:#000; color:white" data-color="black">NEGRE</button>
-          <button style="background:#fff; color:black" data-color="white">BLANC</button>
-          <button style="background:#FFA500; color:black" data-color="#FFA500">TARONJA</button>
-          <button style="background:#999; color:black" data-color="#999999">PLATEJAT</button>
-          <button style="background:#C9B037; color:black" data-color="#C9B037">DAURAT</button>
-        </div>
-      </div>
+  <section id="preview-container">
+    <h2>👀 PREVISUALITZACIÓ</h2>
+    <div id="preview">
+      <span id="previewText">el teu text aquí</span>
     </div>
+  </section>
 
-    <div class="section-title">👀 PREVISUALITZACIÓ</div>
-    <div id="preview-container">
-      <div id="preview"><span id="preview-text">PREVISUALITZACIÓ</span></div>
-    </div>
-
-    <div class="section-title">💰 PREU FINAL</div>
-    <div id="cost">5.00 €</div>
-
-    <div class="section-title">📸 EXEMPLE REAL</div>
-    <div class="example-images">
-      <img src="example1.jpg" alt="Exemple real d'adhesiu">
-    </div>
-  </div>
+  <section style="text-align: center;">
+    <button onclick="sendToWhatsApp()" style="padding: 12px 24px; font-size: 16px; background-color: #4caf50; color: white; border: none; border-radius: 6px; cursor: pointer; margin-top: 20px;">
+      ✅ Tramitar
+    </button>
+  </section>
 
   <script>
-    // Elements del DOM
-    const textInput = document.getElementById('text');
-    const widthInput = document.getElementById('width');
-    const heightInput = document.getElementById('height');
-    const fontSelect = document.getElementById('font');
-    const preview = document.getElementById('preview');
-    const previewText = document.getElementById('preview-text');
-    const colorButtons = document.querySelectorAll('#color-select button');
+    const cmToPx = 37.8;
+    const preview = document.getElementById("preview");
+    const previewText = document.getElementById("previewText");
+    let currentColor = "#000";
 
-    // Variables d'estat
-    let currentColor = 'black';
-    const cmToPx = 37.8; // Conversió cm a píxels
-
-    // Llista completa de tipografies de Word (+150 fonts)
-    const fonts = [
-      "Arial", "Times New Roman", "Calibri", "Cambria", "Georgia", 
-      "Verdana", "Tahoma", "Courier New", "Trebuchet MS", "Franklin Gothic Medium",
-      "Wingdings", "Wingdings 2", "Wingdings 3", "Webdings", "Symbol",
-      "Bahnschrift", "Candara", "Corbel", "Consolas", "Constantia",
-      "Elephant", "Ebrima", "Garamond", "Impact", "Lucida Console",
-      "Lucida Sans Unicode", "Palatino Linotype", "Segoe UI", "Segoe Print",
-      "Segoe Script", "Perpetua", "Rockwell", "Century Gothic", "SimSun",
-      "PMingLiU", "MingLiU", "MS Mincho", "MS Gothic", "Microsoft JhengHei",
-      "Microsoft YaHei", "Malgun Gothic", "Sitka", "Calibri Light",
-      "Cascadia Code", "Fira Code", "Bookman Old Style", "Century Schoolbook",
-      "Goudy Old Style", "Haettenschweiler", "Magneto", "OCR A Extended",
-      "Stencil", "Bauhaus 93", "Bernard MT Condensed", "Broadway",
-      "Brush Script MT", "Chiller", "Colonna MT", "Cooper Black",
-      "Footlight MT Light", "Aharoni", "Andalus", "Angsana New",
-      "AngsanaUPC", "Aparajita", "Arabic Typesetting", "Arial Black",
-      "Arial Narrow", "Agency FB", "Algerian", "Arial Rounded MT Bold",
-      "Baskerville Old Face", "Bell MT", "Berlin Sans FB",
-      "Berlin Sans FB Demi Bold", "Bodoni MT", "Bodoni MT Black",
-      "Bodoni MT Condensed", "Book Antiqua", "Bookshelf Symbol 7",
-      "Bradley Hand ITC", "Britannic Bold", "Calisto MT", "Castellar",
-      "Century", "Comic Sans MS", "Copperplate Gothic Bold",
-      "Copperplate Gothic Light", "Curlz MT", "Dubai", "Elephant",
-      "Engravers MT", "Eras Bold ITC", "Eras Demi ITC", "Eras Light ITC",
-      "Eras Medium ITC", "Felix Titling", "Forte", "Franklin Gothic Book",
-      "Franklin Gothic Demi", "Franklin Gothic Demi Cond", "Franklin Gothic Heavy",
-      "Franklin Gothic Medium Cond", "Freestyle Script", "French Script MT",
-      "Gigi", "Gloucester MT Extra Condensed", "Goudy Stout", "Harlow Solid Italic",
-      "Harrington", "High Tower Text", "Imprint MT Shadow", "Informal Roman",
-      "Javanese Text", "Juice ITC", "Kristen ITC", "Kunstler Script",
-      "Leelawadee UI", "Lucida Bright", "Lucida Calligraphy", "Lucida Fax",
-      "Lucida Handwriting", "Lucida Sans", "Magneto", "Maiandra GD",
-      "Matura MT Script Capitals", "Mistral", "Modern No. 20", "Monotype Corsiva",
-      "MS Outlook", "MS Reference Sans Serif", "MS Reference Specialty", "MT Extra",
-      "Niagara Engraved", "Niagara Solid", "Old English Text MT", "Onyx",
-      "Parchment", "Playbill", "Poor Richard", "Pristina", "Rage Italic", "Ravie",
-      "Script MT Bold", "Showcard Gothic", "Snap ITC", "Tempus Sans ITC",
-      "Viner Hand ITC", "Vivaldi", "Vladimir Script"
-    ];
-
-    // Inicialització de fonts
-    fonts.forEach(font => {
-      const option = document.createElement('option');
-      option.value = font;
-      option.textContent = font;
-      fontSelect.appendChild(option);
-    });
-    fontSelect.value = 'Arial';
-
-    // Funció d'actualització del preu
-    function updateCost() {
-      const width = parseFloat(widthInput.value);
-      const height = parseFloat(heightInput.value);
-      const area = width * height;
-      
-      let total = 5; // Preu base de 5€
-      if (area > 20) {
-        total += (area - 20) * 0.2; // +0.2€ per cada cm² addicional sobre 20
-      }
-      document.getElementById('cost').textContent = `${total.toFixed(2)} €`;
+    function setColor(color) {
+      currentColor = color;
+      updatePreview();
     }
 
-    // Funció d'actualització de la previsualització
     function updatePreview() {
-      const text = textInput.value || ' ';
-      const width = parseFloat(widthInput.value);
-      const height = parseFloat(heightInput.value);
+      const text = document.getElementById("text").value;
+      const font = document.getElementById("font").value;
+      let width = parseFloat(document.getElementById("width").value) || 1;
+      let height = parseFloat(document.getElementById("height").value) || 1;
 
-      // Configuració del fons
-      preview.style.background = currentColor === 'white' ? '#888' : 'white';
-      
-      // Configuració de mides
-      preview.style.width = `${width * cmToPx}px`;
-      preview.style.height = `${height * cmToPx}px`;
-      
-      // Configuració del text
-      previewText.textContent = text;
-      previewText.style.fontFamily = fontSelect.value;
+      const widthError = document.getElementById("widthError");
+      const heightError = document.getElementById("heightError");
+      widthError.textContent = "";
+      heightError.textContent = "";
+
+      if (width > 30) {
+        width = 30;
+        document.getElementById("width").value = width;
+        widthError.textContent = "L'amplada màxima és de 30 cm.";
+      }
+
+      if (height > 24) {
+        height = 24;
+        document.getElementById("height").value = height;
+        heightError.textContent = "L'alçada màxima és de 24 cm.";
+      }
+
+      const pxWidth = width * cmToPx;
+      const pxHeight = height * cmToPx;
+
+      preview.style.width = (pxWidth * 1.4) + "px";
+      preview.style.height = (pxHeight * 1.4) + "px";
+
+      previewText.innerText = text;
+      previewText.style.fontFamily = font;
       previewText.style.color = currentColor;
-      
-      // Càlcul d'escala
-      const fontSize = height * cmToPx * 0.8;
-      previewText.style.fontSize = `${fontSize}px`;
-      const scale = (width * cmToPx) / previewText.scrollWidth;
-      previewText.style.transform = `scaleX(${scale})`;
+
+      preview.style.backgroundColor = (currentColor === "#fff") ? "#666666" : "white";
+
+      previewText.style.fontSize = "100px";
+      previewText.style.transform = "scale(1, 1)";
+
+      requestAnimationFrame(() => {
+        const realWidth = previewText.offsetWidth;
+        const realHeight = previewText.offsetHeight;
+
+        const scaleX = (pxWidth * 0.95) / realWidth;
+        const scaleY = (pxHeight * 0.95) / realHeight;
+
+        const newScale = Math.min(scaleX, scaleY);
+        if (newScale < 1) {
+          previewText.style.fontSize = `${100 * newScale}px`;
+        }
+
+        previewText.style.transform = `scale(${scaleX}, ${scaleY})`;
+      });
     }
 
-    // Event Listeners
-    colorButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        currentColor = button.dataset.color;
-        updatePreview();
-      });
-    });
+    function sendToWhatsApp() {
+      const text = document.getElementById("text").value;
+      const font = document.getElementById("font").value;
+      const width = document.getElementById("width").value;
+      const height = document.getElementById("height").value;
+      const color = currentColor;
 
-    [textInput, widthInput, heightInput, fontSelect].forEach(element => {
-      element.addEventListener('input', () => {
-        updatePreview();
-        updateCost();
-      });
-    });
+      const message = `Hola! Aquí tens la configuració del disseny d'adhesiu:%0A` +
+                      `Text: ${text}%0A` +
+                      `Amplada (cm): ${width}%0A` +
+                      `Alçada (cm): ${height}%0A` +
+                      `Font: ${font.replace(/'/g, "")}%0A` +
+                      `Color: ${color}`;
 
-    // Inicialització
+      const phone = "34666514196";
+      const url = `https://wa.me/${phone}?text=${message}`;
+
+      window.open(url, "_blank");
+    }
+
     updatePreview();
-    updateCost();
   </script>
 </body>
 </html>
